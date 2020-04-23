@@ -1,6 +1,6 @@
 <?php
 
-if ($_COOKIE["login"] = false) {
+if ($_COOKIE["login"] == false) {
     header("refresh: 0; url=login.php");
     exit("You are not logged in. Going bacc.");
 }
@@ -34,17 +34,24 @@ if ($_GET["media"] === "serie") {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Series B R O E R</title>
+        <link rel="shortcut icon" type="image/x-icon" href="netflixlogo.ico"/> 
+        <link rel="stylesheet" href="style.css">
         <style>
             * {
                 font-family: Arial, Helvetica, sans-serif;
             }
+            body {
+                color: rgb(0, 255, 0);
+                background-color: black;
+            }
         </style>
     </head>
     <body>
+        <img src="netflixlogo.png" alt="netflixlogo"> 
         <br>
         <a href="index.php">Terug</a>
         <?php
-        foreach($serieInformatie as $row) { ?>
+        foreach ($serieInformatie as $row) { ?>
             <h1><?php echo $row["title"]; echo " - "; echo $row["rating"] ?></h1>
             <form action="editFilmOfSerie.php" method="POST">
                 <p>Title - <input type="text" name="titleWijzigen" value="<?php echo $row["title"] ?>"></p>
@@ -73,6 +80,7 @@ if ($_GET["media"] === "film" && isset($_GET["id"])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link rel="shortcut icon" type="image/x-icon" href="netflixlogo.ico"/>
         <style>
             * {
                 font-family: Arial, Helvetica, sans-serif;
@@ -83,7 +91,7 @@ if ($_GET["media"] === "film" && isset($_GET["id"])) {
         <br>
         <a href="index.php">Terug</a>
         <?php
-        foreach($filmInformatie as $row) { ?>
+        foreach ($filmInformatie as $row) { ?>
             <h1><?php echo $row["titel"]; echo " - "; echo $row["duur"] ?> minuten</h1>
             <form action="editFilmOfSerie.php" method="POST">
                 <p>Titel - <input type="text" value="<?php echo $row["titel"] ?>" name="titelWijzigen"></p>
@@ -94,7 +102,6 @@ if ($_GET["media"] === "film" && isset($_GET["id"])) {
                 <input type="hidden" value="film" name="media">
                 <br>
                 <iframe width="560" height="315" src="<?php echo $row["trailer"] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                
                 </iframe>
                 <br>
                 <input type="submit" value="Wijzig Veranderingen!" name="wijziging">

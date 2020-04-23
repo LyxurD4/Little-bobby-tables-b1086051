@@ -1,6 +1,6 @@
 <?php
 
-if ($_COOKIE["login"] = false) {
+if ($_COOKIE["login"] == false) {
     header("refresh: 0; url=login.php");
     exit("You are not logged in. Going bacc.");
 }
@@ -26,49 +26,36 @@ try {
 
 if ($_POST["media"] === "serie" && isset($_POST["id"])) {
     $id = $_POST["id"];
-
-    //Data uit de POST halen
+    
     $titleWijzigenVar = $_POST["titleWijzigen"]; 
-    $awardWijzigenVar = $_POST["awardWijzigen"]; 
-    $ratingWijzigenVar = $_POST["ratingWijzigen"]; 
+    $ratingWijzigenVar = $_POST["ratingWijzigen"];
+    $descriptionWijzigenVar = $_POST["descriptionWijzigen"];
+    $awardWijzigenVar = $_POST["awardWijzigen"];
+    $seasonWijzigenVar = $_POST["seasonWijzigen"];  
     $countryWijzigenVar = $_POST["countryWijzigen"]; 
-    $languageWijzigenVar = $_POST["languageWijzigen"]; 
-    $seasonWijzigenVar = $_POST["seasonWijzigen"]; 
-    $descriptionWijzigenVar = $_POST["descriptionWijzigen"]; 
+    $languageWijzigenVar = $_POST["languageWijzigen"];
 
-    //UPDATE
-    $conn->query(
-        "UPDATE series 
-        SET 
-        title = '$titleWijzigenVar',
-        has_won_awards = $awardWijzigenVar,
-        rating = $ratingWijzigenVar,
-        country = '$countryWijzigenVar',
-        language = '$languageWijzigenVar',
-        seasons = $seasonWijzigenVar,
-        description = '$descriptionWijzigenVar'
-        WHERE id = $id"
-    );
+    $serieQuery = "UPDATE series SET title=?, rating=?, description=?, has_won_awards=?, seasons=?, country=?, language=? WHERE id=?";
+    $serieStmt = $conn->prepare($serieQuery);  
+    $serieStmt->execute([$titleWijzigenVar, $ratingWijzigenVar, $descriptionWijzigenVar, $awardWijzigenVar, $seasonWijzigenVar, $countryWijzigenVar, $languageWijzigenVar, $id]); 
+
     header("refresh: 0; url=serieOfFilm.php?media=serie&id=$id");
+    
 }
 
 if ($_POST["media"] === "film" && isset($_POST["id"])) {
     $id = $_POST["id"];
-
-    // Data uit de POST array vissen
+    
     $titelWijzigenVar = $_POST["titelWijzigen"];
     $duurwijzigenVar = $_POST["duurWijzigen"];
     $datumVanUitkomstWijzigenVar = $_POST["datumVanUitkomstWijzigen"];
     $trailerWijzigenVar = $_POST["trailerWijzigen"];
 
-    // UPDATE query 
-    $conn->query("UPDATE films 
-        SET titel = '$titelWijzigenVar', 
-        duur = $duurwijzigenVar, 
-        datum_van_uitkomst = '$datumVanUitkomstWijzigenVar', 
-        trailer = '$trailerWijzigenVar' 
-        WHERE id = $id"
-    );
+    $filmQuery = "UPDATE films SET titel=?, duur=?, datum_van_uitkomst=?, trailer=? WHERE id=?";
+    $filmStmt = $conn->prepare($filmQuery);
+    $filmStmt->execute([$titelWijzigenVar, $duurwijzigenVar, $datumVanUitkomstWijzigenVar, $trailerWijzigenVar, $id]);
+    
     header("refresh: 0; url=serieOfFilm.php?media=film&id=$id");
+    
 }
 

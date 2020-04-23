@@ -1,6 +1,5 @@
 <?php
-
-setcookie("login", false, time() + 3600);
+$fouteInlog = false;
 
 $host="localhost";
 $db = "netland";
@@ -14,7 +13,7 @@ try {
     
     // display a message if connected to database successfully
     if ($conn) {
-        // echo "Connected to the <strong>$db</strong> database successfully!";
+
     }
 } catch (PDOException $e) {
     // report error message
@@ -26,11 +25,11 @@ if (isset($_POST["login"])) {
     $passwordInput = $_POST["password"];
     foreach ($informatie as $row) {
         if ($row["username"] === $usernameInput && $row["password"] === $passwordInput) {
+            setcookie("login", 'true', time() + 3600);
             header("refresh: 0; url=index.php");
-            $_COOKIE["login"] = true;
-            exit("You are being logged in!");
+            exit();
         } else {
-            echo "N O P E";
+            $fouteInlog = true;
         }
     }
 }
@@ -41,6 +40,12 @@ if (isset($_POST["login"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    if ($fouteInlog == true) { ?>
+        <link rel="shortcut icon" type="image/x-icon" href="shrok.ico"/> 
+    <?php } else { ?>
+        <link rel="shortcut icon" type="image/x-icon" href="netflixlogo.ico"/> 
+    <?php } ?>
     <title>Login Page</title>
     <style>
         * {
@@ -55,24 +60,34 @@ if (isset($_POST["login"])) {
         }
         body {
             color: white;
-            /* background-image: url(netland.png);
-            background-repeat: no-repeat; */
-            background: url(netland.png) no-repeat center center fixed; 
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+            <?php 
+            if ($fouteInlog == false) { ?>
+                background: url(netland.png) no-repeat center center fixed;
+                background-size: cover;
+            <?php } if ($fouteInlog == true) { ?>
+                background: url(shrok.jpg) no-repeat center center fixed; 
+                background-size: 130% 130%;
+            <?php } ?>
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
     <div class="login">
-        <h1>Netland admin panel</h1>
+        <h1>
+        <?php 
+        if ($fouteInlog == true) { 
+            echo "N O P E"; 
+        } else { 
+            echo "Netland Admin Panel"; 
+        } ?>
+        </h1>
         <form action="login.php" method="POST">
-            <input type="text" value="Username" name="username">
-            <input type="text" value="Password" name="password">
+            <input type="text" value="test-user" name="username">
+            <input type="text" value="wachtwoord" name="password">
             <input type="submit" value="Log in" name="login">
         </form>
     </div>
+    <?php echo $_COOKIE["login"] ?>
 </body>
 </html>

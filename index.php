@@ -1,6 +1,6 @@
 <?php
 
-if ($_COOKIE["login"] = false) {
+if ($_COOKIE["login"] !== 'true') {
     header("refresh: 0; url=login.php");
     exit("You are not logged in. Going bacc.");
 }
@@ -55,15 +55,17 @@ if(isset($_GET["ratingSortering"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N E T L A N D</title>
+    <link rel="shortcut icon" type="image/x-icon" href="netflixlogo.ico"/> 
+    <link rel="stylesheet" href="style.css">
     <style>
         * {
             font-family: Arial;
-        } 
+        }
         table {
-            border: 1px solid black;
+            border: 1px solid rgb(0, 255, 0);;
         }
         td {
-            border: 1px solid black;
+            border: 1px solid rgb(0, 255, 0);;
         }
         .logout {
             font-size: large;
@@ -72,7 +74,7 @@ if(isset($_GET["ratingSortering"])) {
     </style>
 </head>
 <body>
-    
+<img src="netflixlogo.png" alt="netflixlogo">    
 <br>
 <a class="logout" href="logout.php">Uitloggen</a>
 
@@ -86,7 +88,7 @@ if(isset($_GET["ratingSortering"])) {
         <th><a href="index.php?ratingSortering=rating">Rating</a></th>
     </tr>
         <?php
-        foreach($series as $row) { ?>
+        foreach ($series as $row) { ?>
             <tr>
                 <td><?php echo $row["title"] ?></td>
                 <td><?php echo $row["rating"] ?></td>
@@ -110,7 +112,7 @@ if(isset($_GET["ratingSortering"])) {
         <th><a href="index.php?duurSortering=duur">Duur</a></th>
     </tr>
     <?php
-    foreach($films as $row) {
+    foreach ($films as $row) {
         ?>
         <tr>
             <td><?php echo $row["titel"] ?></td>
