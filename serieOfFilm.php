@@ -5,12 +5,12 @@ if ($_COOKIE["login"] == false) {
     exit("You are not logged in. Going bacc.");
 }
 
-$host="localhost";
+$host = "localhost";
 $db = "netland";
 $username = "root";
 $password = "";
 
-$dsn= "mysql:host=$host;dbname=$db";
+$dsn = "mysql:host=$host;dbname=$db";
 try {
     // create a PDO connection with the configuration data
     $conn = new PDO($dsn, $username, $password);
@@ -52,7 +52,11 @@ if ($_GET["media"] === "serie") {
         <a href="index.php">Terug</a>
         <?php
         foreach ($serieInformatie as $row) { ?>
-            <h1><?php echo $row["title"]; echo " - "; echo $row["rating"] ?></h1>
+            <h1><?php 
+            echo $row["title"]; 
+            echo " - "; 
+            echo $row["rating"]; 
+            ?></h1>
             <form action="editFilmOfSerie.php" method="POST">
                 <p>Title - <input type="text" name="titleWijzigen" value="<?php echo $row["title"] ?>"></p>
                 <p>Awards - <input type="text" name="awardWijzigen" value="<?php echo $row["has_won_awards"] ?>"></p>
@@ -92,7 +96,11 @@ if ($_GET["media"] === "film" && isset($_GET["id"])) {
         <a href="index.php">Terug</a>
         <?php
         foreach ($filmInformatie as $row) { ?>
-            <h1><?php echo $row["titel"]; echo " - "; echo $row["duur"] ?> minuten</h1>
+            <h1><?php 
+            echo $row["titel"]; 
+            echo " - "; 
+            echo $row["duur"]; 
+            ?> minuten</h1>
             <form action="editFilmOfSerie.php" method="POST">
                 <p>Titel - <input type="text" value="<?php echo $row["titel"] ?>" name="titelWijzigen"></p>
                 <p>Duur - <input type="text" value="<?php echo $row["duur"] ?>" name="duurWijzigen"></p>

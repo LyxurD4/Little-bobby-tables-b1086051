@@ -11,9 +11,9 @@
 body {
     color: red;
     <?php 
-    if ($fouteInlog = false) { ?>
+    if ($fouteInlog == false) { ?>
         background: url(netland.png) no-repeat center center fixed;
-    <?php } if ($fouteInlog = true) { ?>
+    <?php } if ($fouteInlog == true) { ?>
         background: url(shrok.jpg) no-repeat center center fixed; 
     <?php } ?>
     background-size: cover;

@@ -1,19 +1,18 @@
 <?php
 $fouteInlog = false;
 
-$host="localhost";
+$host = "localhost";
 $db = "netland";
 $username = "root";
 $password = "";
 
-$dsn= "mysql:host=$host;dbname=$db";
+$dsn = "mysql:host=$host;dbname=$db";
 try {
     // create a PDO connection with the configuration data
     $conn = new PDO($dsn, $username, $password);
     
     // display a message if connected to database successfully
     if ($conn) {
-
     }
 } catch (PDOException $e) {
     // report error message

@@ -5,12 +5,12 @@ if ($_COOKIE["login"] === 'false') {
     exit("You are not logged in. Going bacc.");
 }
 
-$host="localhost";
+$host = "localhost";
 $db = "netland";
 $username = "root";
 $password = "";
 
-$dsn= "mysql:host=$host;dbname=$db";
+$dsn = "mysql:host=$host;dbname=$db";
 try {
     // create a PDO connection with the configuration data
     $conn = new PDO($dsn, $username, $password);
@@ -47,7 +47,6 @@ if (isset($_POST["nieuweSerie"])) {
     $serieStmt->execute([':title' => $titleVar]);
 
     header("Refresh: 0; url=index.php");
-    
 }
 
 if (isset($_POST["nieuweFilm"])) {
@@ -69,7 +68,6 @@ if (isset($_POST["nieuweFilm"])) {
     $filmStmt->execute();
 
     header("Refresh: 0; url=index.php");
-    
 }
 
 if ($_GET["media"] === "serie") { ?>

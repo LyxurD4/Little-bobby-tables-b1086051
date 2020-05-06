@@ -6,12 +6,12 @@ if ($_COOKIE["login"] == false) {
 }
 
 //connectie
-$host="localhost";
+$host = "localhost";
 $db = "netland";
 $username = "root";
 $password = "";
 
-$dsn= "mysql:host=$host;dbname=$db";
+$dsn = "mysql:host=$host;dbname=$db";
 try {
     // create a PDO connection with the configuration data
     $conn = new PDO($dsn, $username, $password);
@@ -40,7 +40,6 @@ if ($_POST["media"] === "serie" && isset($_POST["id"])) {
     $serieStmt->execute([$titleWijzigenVar, $ratingWijzigenVar, $descriptionWijzigenVar, $awardWijzigenVar, $seasonWijzigenVar, $countryWijzigenVar, $languageWijzigenVar, $id]); 
 
     header("refresh: 0; url=serieOfFilm.php?media=serie&id=$id");
-    
 }
 
 if ($_POST["media"] === "film" && isset($_POST["id"])) {
@@ -56,6 +55,5 @@ if ($_POST["media"] === "film" && isset($_POST["id"])) {
     $filmStmt->execute([$titelWijzigenVar, $duurwijzigenVar, $datumVanUitkomstWijzigenVar, $trailerWijzigenVar, $id]);
     
     header("refresh: 0; url=serieOfFilm.php?media=film&id=$id");
-    
 }
 
